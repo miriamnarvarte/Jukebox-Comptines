@@ -1,14 +1,57 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Jukebox
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-item>
+
+    <ion-label position="stacked">Choisir un titre</ion-label>
+    <ion-select [(ngModel)]="pickedSong" (ionChange)="addToPlayList()">
+      <ion-select-option *ngFor="let song of comptines" [value]="song">
+        <ion-label>
+
+          {{song.title}}
+
+        </ion-label>
+
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-list-header>
+      <h3>Playlist</h3>
+    </ion-list-header>
+
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="reorderPlaylist($event)">
+      <ion-item *ngFor="let song of playList">
+        <ion-label>
+          {{song.title}}
+        </ion-label>
+        <ion-avatar slot="start">
+          <ion-img src="/assets{{song.image}}">
+          </ion-img>
+        </ion-avatar>
+        <ion-icon name="musical-note" *ngIf="song.playing"></ion-icon>
+        <ion-reorder>
+          <ion-icon name="reorder"></ion-icon>
+        </ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+
+  </ion-list>
+
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="playSound()">Ecouter</ion-button>
+  </ion-toolbar>
+
+</ion-footer>
