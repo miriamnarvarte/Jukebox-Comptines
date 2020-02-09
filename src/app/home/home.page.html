@@ -13,11 +13,7 @@
     <ion-label position="stacked">Choisir un titre</ion-label>
     <ion-select [(ngModel)]="pickedSong" (ionChange)="addToPlayList()">
       <ion-select-option *ngFor="let song of comptines" [value]="song">
-        <ion-label>
-
-          {{song.title}}
-
-        </ion-label>
+        <ion-label>  {{song.title}} </ion-label>
 
       </ion-select-option>
     </ion-select>
